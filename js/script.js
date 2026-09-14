@@ -19,11 +19,13 @@
   var mobileMenu = document.getElementById('mobile-menu');
   function closeMenu(){
     mobileMenu.classList.remove('is-open');
+    mobileMenu.setAttribute('aria-hidden','true');
     menuToggle.setAttribute('aria-expanded','false');
     document.body.style.overflow = '';
   }
   function openMenu(){
     mobileMenu.classList.add('is-open');
+    mobileMenu.setAttribute('aria-hidden','false');
     menuToggle.setAttribute('aria-expanded','true');
     document.body.style.overflow = 'hidden';
     var first = mobileMenu.querySelector('a');
@@ -196,6 +198,7 @@
     resultBody.textContent = r.body;
     quizWrap.style.display = 'none';
     resultWrap.classList.add('is-active');
+    resultWrap.hidden = false;
     resultWrap.setAttribute('tabindex','-1');
     resultWrap.focus();
   }
@@ -210,6 +213,7 @@
   restartBtn.addEventListener('click', function(){
     diagState = { index:0, answers:[] };
     resultWrap.classList.remove('is-active');
+    resultWrap.hidden = true;
     quizWrap.style.display = '';
     renderQuestion();
   });
@@ -217,7 +221,7 @@
   infoBtn.addEventListener('click', function(){
     var expanded = infoBtn.getAttribute('aria-expanded') === 'true';
     infoBtn.setAttribute('aria-expanded', String(!expanded));
-    infoBox.style.display = expanded ? 'none' : 'block';
+    infoBox.hidden = expanded;
   });
 
   renderQuestion();
@@ -237,7 +241,8 @@
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var nameOk = validateField(document.getElementById('f-name'), document.getElementById('err-name'), 'נא למלא שם מלא');
-    var phoneOk = validateField(document.getElementById('f-phone'), document.getElementById('err-phone'), 'נא למלא מספר טלפון');
+    var phoneInput = document.getElementById('f-phone');
+    var phoneOk = !phoneInput.value.trim() || validateField(phoneInput, document.getElementById('err-phone'), 'נא למלא מספר טלפון תקין');
     var emailOk = validateField(document.getElementById('f-email'), document.getElementById('err-email'), 'נא למלא כתובת אימייל תקינה');
     var msgOk = validateField(document.getElementById('f-message'), document.getElementById('err-message'), 'נא לכתוב כמה מילים');
 
