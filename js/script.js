@@ -8,7 +8,7 @@
   var lastY = 0;
   function onScroll(){
     var y = window.scrollY || 0;
-    header.classList.toggle('is-compact', y > 40);
+    if(header) header.classList.toggle('is-compact', y > 40);
     lastY = y;
   }
   window.addEventListener('scroll', onScroll, {passive:true});
@@ -31,15 +31,15 @@
     var first = mobileMenu.querySelector('a');
     if(first) first.focus();
   }
-  menuToggle.addEventListener('click', function(){
+  if(menuToggle && mobileMenu) menuToggle.addEventListener('click', function(){
     var expanded = menuToggle.getAttribute('aria-expanded') === 'true';
     if(expanded){ closeMenu(); } else { openMenu(); }
   });
-  mobileMenu.querySelectorAll('a').forEach(function(a){
+  if(mobileMenu) mobileMenu.querySelectorAll('a').forEach(function(a){
     a.addEventListener('click', closeMenu);
   });
   document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape' && mobileMenu.classList.contains('is-open')){
+    if(e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('is-open')){
       closeMenu();
       menuToggle.focus();
     }
@@ -206,28 +206,30 @@
     resultWrap.focus();
   }
 
-  backBtn.addEventListener('click', function(){
+  if(qEl && optsEl && resultWrap){
+    backBtn.addEventListener('click', function(){
     if(diagState.index > 0){
       diagState.index--;
       renderQuestion();
     }
-  });
+    });
 
-  restartBtn.addEventListener('click', function(){
+    restartBtn.addEventListener('click', function(){
     diagState = { index:0, answers:[] };
     resultWrap.classList.remove('is-active');
     resultWrap.hidden = true;
     quizWrap.style.display = '';
     renderQuestion();
-  });
+    });
 
-  infoBtn.addEventListener('click', function(){
+    infoBtn.addEventListener('click', function(){
     var expanded = infoBtn.getAttribute('aria-expanded') === 'true';
     infoBtn.setAttribute('aria-expanded', String(!expanded));
     infoBox.hidden = expanded;
-  });
+    });
 
-  renderQuestion();
+    renderQuestion();
+  }
 
   /* ---- Contact form ---- */
   var form = document.getElementById('contact-form');
@@ -241,7 +243,7 @@
     return valid;
   }
 
-  form.addEventListener('submit', function(e){
+  if(form && formWrap && success) form.addEventListener('submit', function(e){
     e.preventDefault();
     var nameOk = validateField(document.getElementById('f-name'), document.getElementById('err-name'), 'נא למלא שם מלא');
     var phoneInput = document.getElementById('f-phone');

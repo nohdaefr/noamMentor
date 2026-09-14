@@ -653,6 +653,36 @@
     .trust__num{ font-size:30px; }
     .footer__top{ gap:28px; }
   }
+
+  /* ============ INTERNAL PAGE SHELL ============ */
+  .inner-hero{ padding-block:clamp(100px,14vw,190px) clamp(70px,9vw,120px); background:var(--paper-dim); border-bottom:1px solid var(--line-on-paper); }
+  .inner-hero h1,.page-hero h1{ margin-top:24px; max-width:14ch; font:600 clamp(42px,6vw,78px)/1.04 var(--font-display); letter-spacing:-.025em; }
+  .inner-hero h1 em,.page-hero h1 em{ color:var(--cobalt); font-style:normal; }
+  .inner-hero .lede,.page-hero .lede{ margin-top:28px; max-width:39ch; }
+  .inner-page .method__item h2{ font:600 clamp(24px,3vw,34px)/1.2 var(--font-display); }
+  .inner-page .method__item small{ display:block; margin-top:16px; color:var(--cobalt); font-size:13px; font-weight:700; }
+  .inner-page .method__list{ max-width:900px; }
+  .inner-cta{ margin-top:56px; }
+  .page-hero__grid{ display:grid; grid-template-columns:1fr auto; gap:48px; align-items:end; }
+  .page-hero{ background:var(--paper-dim); }
+  .page-hero__index{ padding-bottom:8px; color:var(--cobalt); font:700 11px/1.8 var(--font-body); letter-spacing:.16em; text-align:end; }
+  .page-hero__index span{ color:var(--stone-dark); font-size:9px; }
+  .contact-page{ min-height:calc(100vh - 80px); display:flex; align-items:center; }
+  .contact-page .contact__title em{ color:var(--cobalt); font-style:normal; }
+  .inner-page .site-footer{ margin-top:0; }
+  .inner-page .footer__grid{ display:grid; grid-template-columns:1fr auto auto; gap:40px; align-items:end; }
+  .inner-page .footer__grid p{ margin-top:12px; color:rgba(247,248,243,.7); font-size:14px; }
+  .inner-page .footer__grid nav{ display:flex; gap:24px; flex-wrap:wrap; }
+  .inner-page .footer__grid nav a{ color:rgba(247,248,243,.76); text-decoration:none; font-size:14px; }
+  .inner-page .footer__legal{ margin-top:0 !important; white-space:nowrap; }
+  @media (max-width:767px){
+    .page-hero__grid{ grid-template-columns:1fr; gap:30px; }
+    .page-hero__index{ text-align:start; }
+    .inner-hero h1,.page-hero h1{ font-size:clamp(39px,11vw,58px); }
+    .inner-page .footer__grid{ grid-template-columns:1fr; gap:24px; }
+    .inner-page .footer__grid nav{ gap:14px 20px; }
+    .inner-page .footer__legal{ white-space:normal; }
+  }
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{ animation-duration:1ms !important; transition-duration:1ms !important; scroll-behavior:auto !important; }
   }
