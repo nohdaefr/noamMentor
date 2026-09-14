@@ -171,7 +171,10 @@
       b.type = 'button';
       b.className = 'diagnostic__option';
       b.innerHTML = '<span class="diagnostic__option-letter">' + letters[idx] + '</span><span>' + opt.t + '</span>';
-      b.addEventListener('click', function(){ selectAnswer(opt.cat); });
+      b.addEventListener('click', function(){
+        b.classList.add('is-selected');
+        window.setTimeout(function(){ selectAnswer(opt.cat); }, reduceMotion ? 0 : 160);
+      });
       optsEl.appendChild(b);
     });
   }
